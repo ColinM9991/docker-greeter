@@ -1,14 +1,5 @@
 version: "3.8"
 services:
-    
-    reverse-proxy:
-        container_name: reverse-proxy
-        build: reverse-proxy/.
-        ports:
-            - 8080:8080
-        volumes:
-            - ./reverse-proxy/src/nginx.conf:/etc/nginx/nginx.conf
-            - ./reverse-proxy/src/sites-available:/etc/nginx/sites-enabled
             
     greeter-alice:
         container_name: greeter-alice
@@ -21,3 +12,15 @@ services:
         build: greeter/.
         environment:
             NAME: Bob
+    
+    reverse-proxy:
+        container_name: reverse-proxy
+        build: reverse-proxy/.
+        ports:
+            - 8080:8080
+        volumes:
+            - ./reverse-proxy/src/nginx.conf:/etc/nginx/nginx.conf
+            - ./reverse-proxy/src/sites-available:/etc/nginx/sites-enabled
+        depends_on:
+            - greeter-bob
+            - greeter-alice
