@@ -6,7 +6,9 @@ The following repository contains Dockerfiles for two Docker containers.
 
 ## greeter
 
-The greeter container is quite simple. It contains a Python app that hosts a web server, using [Flask](https://flask.palletsprojects.com/en/2.0.x/), which will echo back a name that is captured from a `NAME` environment variable.
+The greeter container is quite simple. It contains a Python app that hosts a web server, using [Flask](https://flask.palletsprojects.com/en/2.0.x/), which will echo back two values
+1. a name that is captured from a `NAME` environment variable.
+2. the value of the `X-Referrer` header which, for simplicity, is hardcoded in the nginx config.
 
 The container runs on Debian and installs Python, pip and the Flask Python dependency when the container is building.
 
